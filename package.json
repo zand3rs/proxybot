@@ -21,5 +21,8 @@
   },
   "homepage": "https://github.com/zand3rs/proxylite",
   "author": "Alexander Magtipon",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "node-test-helper": "^1.0.0"
+  }
 }
