@@ -1,2 +1,2 @@
-# proxylite
-Proxylite (comming soon!)
+# proxybot
+Proxybot (comming soon!)
