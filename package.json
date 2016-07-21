@@ -23,9 +23,12 @@
   "author": "Alexander Magtipon",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.9.0",
+    "fs-extra": "^0.30.0",
     "http-proxy": "^1.14.0",
     "include-all": "^0.1.6",
-    "lodash": "^4.13.1"
+    "lodash": "^4.13.1",
+    "prompt": "^1.0.0"
   },
   "devDependencies": {
     "node-test-helper": "^1.0.0"
