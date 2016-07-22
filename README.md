@@ -29,6 +29,7 @@ $ proxybot new <project_dir>
 The following files will be created under the project directory provided:
 
 ```
+package.json
 app.js
 config/
   http.js
