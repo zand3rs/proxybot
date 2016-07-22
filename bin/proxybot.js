@@ -16,7 +16,6 @@ program
   .command("new [app]")
   .description("Create new proxybot app.")
   .action(function(app, options) {
-    console.log("app:", app);
     create(app);
   });
 
@@ -46,6 +45,31 @@ function getFiles(root) {
 
 //------------------------------------------------------------------------------
 
+function generatePackage(folder) {
+  var packagePath = nodepath.join(folder, "package.json");
+  var packageName = nodepath.basename(fs.realpathSync(folder));
+  var packageVersion = package.version;
+  var packageJson = {
+    "name": packageName,
+    "private": true,
+    "version": "0.0.0",
+    "description": "Proxybot app.",
+    "main": "app.js",
+    "dependencies": {
+      "proxybot": packageVersion
+    },
+    "scripts": {
+      "start": "node app.js"
+    },
+    "author": "",
+    "license": ""
+  };
+
+  fs.writeJsonSync(packagePath, packageJson);
+}
+
+//------------------------------------------------------------------------------
+
 function create(folder) {
   var _folder = nodepath.normalize(folder || ".");
 
@@ -57,13 +81,12 @@ function create(folder) {
   var templatePath = nodepath.join(__dirname, "..", "template");
   var files = getFiles(templatePath);
   console.log("The ff. files will be created in '%s' directory:", _folder);
-  console.log("  %s", files.join("\n  "));
+  console.log("  package.json\n  %s", files.join("\n  "));
   prompt.confirm("Do you want to continue?", function(err, ans) {
     if (ans) {
-      if (! /^[.][.]?[\/\\]*$/.test(_folder)) {
-        fs.mkdirsSync(_folder);
-      }
+      fs.ensureDirSync(_folder);
       fs.copySync(templatePath, _folder);
+      generatePackage(_folder);
       console.log("Done.");
     } else {
       console.log("Cancelled.");
