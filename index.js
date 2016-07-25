@@ -77,7 +77,7 @@ Proxybot.prototype._responseHandler = function(req, res) {
   var serverError = _.get(self.responses, "500");
 
   res.send = function(path) {
-    var response = _.get(self.responses, (path || "").replace("/", "."));
+    var response = _.get(self.responses, (path || "").replace(/\//g, "."));
     var payload = _.get(response, method) || response || serverError;
 
     var statusCode = _.get(payload, "statusCode", 200);
